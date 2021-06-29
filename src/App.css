@@ -7,6 +7,37 @@
   pointer-events: none;
 }
 
+@import url(//fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
+
+.jejumyeongjo * {
+  font-family: "Jeju Myeongjo", serif;
+}
+
+@font-face {
+  font-family: "handFont";
+  src: url("./font/나눔손글씨\ 가람연꽃\ \(1\).ttf");
+}
+
+@font-face {
+  font-family: "Ivy";
+  src: url("./font/dear\ ivy\,.otf");
+}
+
+@font-face {
+  font-family: "WintheCancer";
+  src: url("./font/나눔손글씨\ 예당체.ttf");
+}
+
+@font-face {
+  font-family: "IloveSon";
+  src: url("./font/나눔손글씨\ 사랑해\ 아들.ttf");
+}
+
+@font-face {
+  font-family: "Monaco";
+  src: url("./font/HV\ Carlo\ Monaco.otf");
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
