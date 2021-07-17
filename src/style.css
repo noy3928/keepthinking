@@ -1,0 +1,97 @@
+.pencil {
+  position: absolute;
+  right: -50px;
+  top: 300px;
+  max-width: 500px;
+  max-height: 500px;
+  width: auto;
+  height: auto;
+  filter: drop-shadow(10px 10px 10px #000);
+  z-index: 11;
+  cursor: pointer;
+  transition: 0.5s ease-in-out;
+}
+
+.show-modal {
+  font-size: 2rem;
+  font-weight: 600;
+  padding: 1.75rem 3.5rem;
+  margin: 5rem 2rem;
+  border: none;
+  background-color: #fff;
+  color: #444;
+  border-radius: 10rem;
+  cursor: pointer;
+}
+
+.close-modal {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  font-size: 1.5rem;
+  color: #333;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+h1 {
+  font-size: 25px;
+  color: #3f3737;
+}
+
+/* -------------------------- */
+/* CLASSES TO MAKE MODAL WORK */
+.hidden {
+  display: none;
+}
+
+.modal {
+  position: absolute;
+  top: 65%;
+  left: 47%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  height: 20%;
+  background-color: #fafafa;
+  /* padding: 6rem; */
+  border-radius: 3px;
+  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+  z-index: 14;
+  font-family: "handFont";
+  padding-top: 37px;
+  box-sizing: border-box;
+  /* padding-bottom: 10px; */
+}
+
+.overlay {
+  position: absolute;
+  top: -1000px;
+  left: -3000px;
+  width: 1000%;
+  height: 1000%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(3px);
+  z-index: 13;
+}
+
+.passwordcheck {
+  font-size: 25px;
+  font-family: "handFont";
+  width: 100%;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #6161616e;
+  transition: 0.5s ease-in-out;
+
+  height: 37px;
+}
+
+.passwordcheck:focus {
+  outline: none;
+  border-bottom: 1px solid #616161;
+}
+.passwordcheck::placeholder {
+  opacity: 0.6;
+  font-size: 22px;
+}

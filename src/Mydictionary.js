@@ -13,6 +13,7 @@ const Mydic = (props) => {
   const dispatch = useDispatch();
   // 버킷리스트를 리덕스 훅으로 가져오기
   const dic_list = useSelector((state) => state.dic.list);
+  // console.log("Mydictionary컴포넌트에서 뿌려질 데이터", dic_list);
 
   return (
     <React.Fragment>
@@ -25,25 +26,37 @@ const Mydic = (props) => {
                 <Eachdesc
                   onClick={() => {
                     props.history.push("/detail/" + index);
+                    document.querySelector(".pencil").style.top = "450px";
+                    document.querySelector(".pencil").style.right = "-10px";
+                    document.querySelector(".pencil").style.transform =
+                      "rotate(120deg)";
                   }}
                 >
-                  <Wordtitle>단어 </Wordtitle>{" "}
+                  <Wordtitle>제목 </Wordtitle>{" "}
                   <Worddetail>: {list.word}</Worddetail>
                 </Eachdesc>
                 <Eachdesc
                   onClick={() => {
                     props.history.push("/detail/" + index);
+                    document.querySelector(".pencil").style.top = "450px";
+                    document.querySelector(".pencil").style.right = "-10px";
+                    document.querySelector(".pencil").style.transform =
+                      "rotate(120deg)";
                   }}
                 >
-                  <Wordtitle>설명 </Wordtitle>{" "}
+                  <Wordtitle>내용 </Wordtitle>{" "}
                   <Worddetail>: {list.desc}</Worddetail>
                 </Eachdesc>
                 <Exam
                   onClick={() => {
                     props.history.push("/detail/" + index);
+                    document.querySelector(".pencil").style.top = "450px";
+                    document.querySelector(".pencil").style.right = "-10px";
+                    document.querySelector(".pencil").style.transform =
+                      "rotate(120deg)";
                   }}
                 >
-                  <Examtitle>예시 </Examtitle>{" "}
+                  <Examtitle>글쓴이 </Examtitle>{" "}
                   <Worddetail>: {list.exam}</Worddetail>
                 </Exam>
               </Textinbox>
@@ -51,12 +64,12 @@ const Mydic = (props) => {
           );
         })}
       </Maintextbox>
-      <Pencilimg
+      {/* <Pencilimg
         src={pencil}
         onClick={() => {
           props.history.push("/addword");
         }}
-      />
+      /> */}
     </React.Fragment>
   );
 };
@@ -69,6 +82,9 @@ const Maintextbox = styled.div`
   width: 50%;
   height: 60%;
   overflow: scroll;
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const Wordindex = styled.div`
@@ -79,14 +95,15 @@ const Wordindex = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 20px;
 `;
 
 const Testbox = styled.div`
   width: 100%;
-  height: 35%;
+  height: auto;
+  min-height: 170px;
   // background-color: #fafafa;
-
-  margin-bottom: 10px;
+  margin-bottom: 50px;
   display: grid;
   grid-template-columns: 10% 90%;
   font-size: 28px;
@@ -115,7 +132,7 @@ const Worddetail = styled.div`
 const Exam = styled.div`
   color: #77acff;
   display: grid;
-  grid-template-columns: 15% 85%;
+  grid-template-columns: 20% 80%;
   cursor: pointer;
 `;
 

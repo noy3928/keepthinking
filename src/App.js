@@ -9,20 +9,20 @@ import { withRouter } from "react-router";
 import { Route, Switch } from "react-router-dom";
 
 // import { firestore } from "./firebase";
-import { loadDicFB, addDic } from "./redux/modules/dictionary";
+import { loadDicFB, addDic, getPath } from "./redux/modules/dictionary";
 
+import Pencil from "./Pencil";
 import Mydic from "./Mydictionary";
 import Addword from "./Addword";
-import Spinner from "./Spinner";
 import Detail from "./Detail";
-import Test from "./Test";
-import background from "./img/Background.png";
 import background2 from "./img/Background1.png";
 import backshadow from "./img/backgroundshadow.png";
 import note from "./img/note.png";
-import background3 from "./img/background3.png";
+import background4 from "./img/greenBackground.png";
+import card from "./img/card.png";
+import title from "./img/title4.png";
 
-import Pencil from "./Pencil";
+import "./style.css";
 
 const mapStateTopProps = (state) => ({
   dic_list: state.dic.list,
@@ -37,6 +37,9 @@ const mapDispatchToProps = (dispatch) => ({
   create: (new_item) => {
     dispatch(addDic(new_item));
   },
+  // getPath: (path) => {
+  //   dispatch(getPath(path));
+  // },
 });
 
 class App extends React.Component {
@@ -44,22 +47,24 @@ class App extends React.Component {
     super(props);
     // App 컴포넌트의 state를 정의해줍니다.
     this.state = {};
+
     // ref는 이렇게 선언합니다!
-    this.text = React.createRef();
+    this.path = React.createRef();
   }
 
   componentDidMount() {
+    // console.log("지금 로드생성함수를 호출합니다.");
     this.props.load();
-    console.log(this.props.is_loaded);
   }
 
-  addBucketList = () => {
-    const new_item = this.text.current.value;
-    this.props.create(new_item); //리덕스에서 가져온 함수를 여기서 실행시킨다.
-  };
+  componentDidUpdate() {
+    // let path = this.path.current.props.path;
+    // console.log(path);
+  }
 
   // 랜더 함수 안에 리액트 엘리먼트를 넣어줍니다!
   render() {
+    let data = this.props;
     return (
       <div className="App">
         <Mainbody>
@@ -71,13 +76,25 @@ class App extends React.Component {
               <Route path="/addword" component={Addword} />
               <Route path="/detail/:index" component={Detail} />
             </Switch>
+            <Pencil page={data} />
+            <Cardbox>
+              <div>
+                <Cardimg src={card} />
+                <Cardmasseage>
+                  어떤 생각을 <br />
+                  하고 계신가요?
+                </Cardmasseage>
+              </div>
+            </Cardbox>
           </Mainbox>
+          <Sizemessage>The page supports minimum size of 1000px</Sizemessage>
           <TitleBox>
-            <Maintitle>MD|</Maintitle>
+            {/* <Maintitle>WT|</Maintitle>
             <SubtitleBox>
-              <My>My</My>
-              <Dictio>Dictionary</Dictio>
-            </SubtitleBox>
+              <My>What is your</My>
+              <Dictio>Thinking</Dictio>
+            </SubtitleBox> */}
+            <TitleImg src={title} />
           </TitleBox>
         </Mainbody>
       </div>
@@ -95,19 +112,56 @@ class App extends React.Component {
             </button> */
 }
 
+const Cardbox = styled.div`
+  position: absolute;
+  max-width: 300px;
+  max-height: 300px;
+  width: auto;
+  height: auto;
+  bottom: 10px;
+  left: -300px;
+  transform: rotate(-10deg);
+  &div {
+    position: relative;
+  }
+`;
+
+const Cardimg = styled.img`
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(3px 3px 1px #000);
+`;
+
+const Cardmasseage = styled.div`
+  top: 55px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  font-size: 35px;
+`;
+
 const TitleBox = styled.div`
   display: flex;
-  width: 600px;
-  height: 200px;
+  width: auto;
+  height: auto;
+  max-width: 200px;
+  max-height: 200px;
   font-family: "Ivy";
   position: absolute;
-  left: 50px;
-  bottom: 30px;
-  flex-direction: row;
+  left: 30px;
+  top: 30px;
+  // flex-direction: row;
+  // color: #fafafa;
+  z-index: 12;
+`;
+
+const TitleImg = styled.img`
+  width: 100%;
+  height: 100%;
 `;
 
 const Maintitle = styled.div`
-  font-size: 150px;
+  font-size: 70px;
   width: auto;
   height: auto;
   max-width: 300px;
@@ -120,16 +174,16 @@ const SubtitleBox = styled.div`
   justify-content: center;
   align-items: flex-start;
   flex-direction: column;
-  font-size: 45px;
+  font-size: 25px;
 `;
 const My = styled.div``;
 
 const Dictio = styled.div`
-  margin-top: 10px;
+  margin-top: 2px;
 `;
 
 const Mainbody = styled.div`
-  background-image: url("${background3}");
+  background-image: url("${background4}");
   background-size: cover;
   max-width: 100vw;
   height: 100vh;
@@ -142,16 +196,29 @@ const Mainbody = styled.div`
   padding-bottom: 280px;
   box-sizing: border-box;
   position: relative;
-  font-family: "WintheCancer";
+  font-family: "handFont";
   color: #616161;
+  @media screen and (max-width: 1000px) {
+    padding-bottom: 100px;
+  }
 `;
 
 const Mainshadow = styled.img`
   width: 170%;
   height: 170%;
   position: absolute;
-  bottom: 150px;
+  bottom: 190px;
   z-index: 10;
+`;
+
+const Sizemessage = styled.div`
+  display: none;
+  font-family: "Ivy";
+  color: #fafafa;
+  font-size: 60px;
+  @media screen and (max-width: 1000px) {
+    display: block;
+  }
 `;
 
 const Mainbox = styled.div`
@@ -167,12 +234,14 @@ const Mainbox = styled.div`
   padding: 50px 0px 0px 0px;
   position: relative;
   box-sizing: border-box;
+  @media screen and (max-width: 1000px) {
+    display: none;
+  }
 `;
 
 const Noteimg = styled.img`
   width: 100%;
   height: 100%;
-  cursor: pointer;
   z-index: 1;
 `;
 

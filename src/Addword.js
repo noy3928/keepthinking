@@ -12,37 +12,51 @@ const AddDic = (props) => {
   const input_word = React.useRef(null);
   const input_desc = React.useRef(null);
   const input_ex = React.useRef(null);
-  let test = props.match;
-  console.log(test.path);
+  const input_password = React.useRef(null);
 
   return (
     <React.Fragment>
+      <Backarrow
+        src={backarrow}
+        onClick={() => {
+          //   dispatch(); <- 괄호안에는 액션 생성 함수가 들어가야겠죠?
+          // 예를 들면 이렇게요.
+          props.history.push("/");
+          document.querySelector(".pencil").style.top = "300px";
+          document.querySelector(".pencil").style.right = "-50px";
+          document.querySelector(".pencil").style.transform = "rotate(0deg)";
+          document.querySelector(".pencil").style.cursor = "pointer";
+        }}
+      />
       <Maintextbox>
-        <Backarrow
-          src={backarrow}
-          onClick={() => {
-            //   dispatch(); <- 괄호안에는 액션 생성 함수가 들어가야겠죠?
-            // 예를 들면 이렇게요.
-            props.history.goBack();
-          }}
-        />
         <Topbox>
           <Testbox>
             <div>
-              <span>단어 :</span>
+              <span>제목 :</span>
               <input type="text" ref={input_word}></input>
             </div>
           </Testbox>
           <Testbox>
             <div>
-              <span>설명 :</span>
+              <span>내용 :</span>
               <input type="text" ref={input_desc}></input>
             </div>
           </Testbox>
           <Testbox>
             <div>
-              <span>예시 :</span>
+              <span>글쓴이 :</span>
               <input type="text" ref={input_ex}></input>
+            </div>
+          </Testbox>
+          <Testbox>
+            <div>
+              <span>비번 :</span>
+              <input
+                type="text"
+                className="password-input"
+                ref={input_password}
+                placeholder="비밀번호를 꼭 기억해주세요!"
+              ></input>
             </div>
           </Testbox>
         </Topbox>
@@ -53,18 +67,24 @@ const AddDic = (props) => {
                 word: input_word.current.value,
                 desc: input_desc.current.value,
                 exam: input_ex.current.value,
+                pass: input_password.current.value,
               };
+              // console.log("-------단어를 추가합니다");
               dispatch(addDicFB(my_add_word));
-
               props.history.goBack();
-              dispatch(loadDicFB());
+              // dispatch(loadDicFB());
+              document.querySelector(".pencil").style.top = "300px";
+              document.querySelector(".pencil").style.right = "-50px";
+              document.querySelector(".pencil").style.transform =
+                "rotate(0deg)";
+              document.querySelector(".pencil").style.cursor = "pointer";
             }}
           >
-            단어 추가하기 +
+            추가하기 +
           </Addwordtitle>
         </Downbox>
       </Maintextbox>
-      <Pencilimg src={pencil} />
+      {/* <Pencilimg src={pencil} /> */}
     </React.Fragment>
   );
 };
@@ -75,9 +95,10 @@ const Backarrow = styled.img`
   max-width: 40px;
   max-height: 40px;
   position: absolute;
-  top: -47px;
-  left: 18px;
+  top: 330px;
+  left: 160px;
   cursor: pointer;
+  z-index: 11;
 `;
 
 const Topbox = styled.div``;
@@ -130,7 +151,7 @@ const Testbox = styled.div`
   flex-direction: column;
   & div {
     display: grid;
-    grid-template-columns: 15% 85%;
+    grid-template-columns: 22% 78%;
     width: 100%;
     height: 100%;
   }
@@ -149,6 +170,9 @@ const Testbox = styled.div`
     :focus {
       outline: none;
       border-bottom: 1px solid #616161;
+    }
+    ::placeholder {
+      opacity: 0.6;
     }
     height: 50%;
   }

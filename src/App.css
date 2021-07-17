@@ -38,6 +38,13 @@
   src: url("./font/HV\ Carlo\ Monaco.otf");
 }
 
+@font-face {
+  font-family: "성실체";
+  src: url("./font/나눔손글씨\ 성실체.ttf");
+}
+
+@import url(//fonts.googleapis.com/earlyaccess/jejumyeongjo.css);
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
